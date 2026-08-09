@@ -7,6 +7,7 @@ not user identities, organization settings, host configuration or secrets.
 Every `packages/*/default.nix` is exported automatically under
 `packages.x86_64-linux`:
 
+- `amneziawg`
 - `ferrite`
 - `kaspersky-ksc-agent`
 - `network-manager-amneziawg`
@@ -21,6 +22,8 @@ locks its inputs.
 Package-local reusable integration may be exposed through package passthru.
 For example, `kaspersky-ksc-agent.nixosModule` contains generic service logic
 and safe protocol defaults, while consumers must provide the server address.
+The patched `amneziawg` kernel module provides `withKernel` so a NixOS consumer
+can build it against the kernel selected by that host.
 
 This repository must be publicly fetchable because the public system flake
 uses it without SSH credentials.

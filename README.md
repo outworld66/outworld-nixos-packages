@@ -18,5 +18,9 @@ git identities or organization configuration. Consumers own all enablement and
 settings. As a library it does not commit `flake.lock`; the consuming flake
 locks its inputs.
 
+Package-local reusable integration may be exposed through package passthru.
+For example, `kaspersky-ksc-agent.nixosModule` contains generic service logic
+and safe protocol defaults, while consumers must provide the server address.
+
 This repository must be publicly fetchable because the public system flake
 uses it without SSH credentials.

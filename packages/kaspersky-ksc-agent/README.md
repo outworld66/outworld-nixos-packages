@@ -1,8 +1,10 @@
 # Kaspersky Security Center Network Agent
 
 This directory packages the upstream Kaspersky Network Agent Debian payload as
-a Nix derivation. It intentionally contains no server address, registration
-settings, certificates or NixOS enablement module; consumers provide those.
+a Nix derivation. Its reusable NixOS module is attached as
+`kaspersky-ksc-agent.nixosModule` through package passthru and provides safe
+protocol defaults. It intentionally contains no server address, certificates
+or consumer enablement; consumers provide those.
 
 Build it from the package-library repository with:
 

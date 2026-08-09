@@ -9,7 +9,7 @@
   perl,
 }:
 
-stdenv.mkDerivation {
+stdenv.mkDerivation (finalAttrs: {
   pname = "kaspersky-ksc-agent";
   version = "16.3.0-1207";
 
@@ -68,6 +68,8 @@ stdenv.mkDerivation {
       "$out/opt/kaspersky/klnagent64/sbin/protcomp/libftbridge.so"
   '';
 
+  passthru.nixosModule = import ./module.nix { defaultPackage = finalAttrs.finalPackage; };
+
   meta = {
     description = "Kaspersky Security Center Network Agent";
     homepage = "https://support.kaspersky.com/ksc/16.1/en-US/5022.htm";
@@ -76,4 +78,4 @@ stdenv.mkDerivation {
     mainProgram = "klmover";
     platforms = [ "x86_64-linux" ];
   };
-}
+})

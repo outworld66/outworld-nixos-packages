@@ -100,6 +100,7 @@ buildFHSEnv {
 
       # GPU / display
       mesa
+      libgbm
       libdrm
       libGL
       libxkbcommon

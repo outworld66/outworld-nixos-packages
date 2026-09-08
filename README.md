@@ -10,6 +10,7 @@ Every `packages/*/default.nix` is exported automatically under
 - `amneziawg`
 - `ferrite`
 - `kaspersky-ksc-agent`
+- `mcp-mermaid`
 - `network-manager-amneziawg`
 - `rlsp-yaml`
 - `telegram-desktop`

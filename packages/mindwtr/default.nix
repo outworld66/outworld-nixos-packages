@@ -50,7 +50,10 @@ buildFHSEnv {
       # Tauri core (deb Depends: libwebkit2gtk-4.1, libgtk-3, libappindicator3)
       webkitgtk_4_1
       gtk3
+      glib
+      libsoup_3
       libayatana-appindicator
+      alsa-lib
       glib-networking
       shared-mime-info
       gdk-pixbuf

@@ -38,6 +38,7 @@ buildFHSEnv {
 
   targetPkgs =
     pkgs: with pkgs; [
+      limux-unwrapped
       gtk4
       libadwaita
       webkitgtk_6_0

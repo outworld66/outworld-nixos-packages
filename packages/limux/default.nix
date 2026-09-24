@@ -57,6 +57,11 @@ buildFHSEnv {
 
   runScript = "${limux-unwrapped}/usr/bin/limux";
 
+  extraBuildCommands = ''
+    ln -s ${limux-unwrapped}/usr/lib/limux/libghostty-internal.so \
+      $out/usr/lib64/libghostty-internal.so
+  '';
+
   extraInstallCommands = ''
     mkdir -p "$out/usr/local/lib"
     ln -s "${limux-unwrapped}/usr/lib/limux" "$out/usr/local/lib/limux"

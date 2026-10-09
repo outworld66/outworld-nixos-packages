@@ -4,6 +4,7 @@
   fetchurl,
   dpkg,
   buildFHSEnv,
+  librsvg,
 }:
 
 let
@@ -46,6 +47,7 @@ buildFHSEnv {
       pango
       cairo
       gdk-pixbuf
+      librsvg
       libepoxy
       libxkbcommon
       wayland
@@ -56,6 +58,9 @@ buildFHSEnv {
     ];
 
   runScript = "${limux-unwrapped}/usr/bin/limux";
+  profile = ''
+    export GDK_PIXBUF_MODULE_FILE="${librsvg}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+  '';
 
   extraBuildCommands = ''
     ln -s ${limux-unwrapped}/usr/lib/limux/libghostty-internal.so \

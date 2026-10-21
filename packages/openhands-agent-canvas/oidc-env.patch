@@ -1,0 +1,19 @@
+--- a/scripts/dev-safe.mjs
++++ b/scripts/dev-safe.mjs
+@@ -800,8 +800,16 @@ export function buildAgentServerEnv(config, options = {}) {
+       .map((key) => [key, env[key]]),
+   );
++  const oidcEnv = Object.fromEntries(
++    Object.entries(env).filter(
++      ([key, value]) =>
++        value !== undefined &&
++        /^OH_OIDC_(ISSUER_URL|CLIENT_ID|CLIENT_SECRET|ALLOWED_GROUPS_\d+|ADMIN_GROUPS_\d+)$/.test(key),
++    ),
++  );
+   return {
+     ...buildAgentServerTelemetryEnv(env),
+     ...conversationRuntimeEnv,
++    ...oidcEnv,
+     ...(env.VITE_ENABLE_BROWSER_TOOLS === "false"
+       ? { OH_ENABLE_BROWSER: env.OH_ENABLE_BROWSER || "false" }
+       : {}),

@@ -12,8 +12,8 @@ buildNpmPackage {
   src = fetchFromGitHub {
     owner = "outworld66";
     repo = "OpenHands";
-    rev = "d8f8094ad77491f968df6a1a699ec2e23edc3053";
-    hash = "sha256-z34kOYdCnETCnOeTnCV4BSIj588NaIaVsDyM86ZSsEA=";
+    rev = "2a8ef4f4a";
+    hash = "sha256-Upe2fMM8seq+xzkPSDhNi0cX1PHg+JbA5LM+bA2tLmc=";
   };
 
   nodejs = nodejs_24;

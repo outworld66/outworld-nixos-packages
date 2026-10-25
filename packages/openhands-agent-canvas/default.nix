@@ -25,7 +25,7 @@ buildNpmPackage {
   installPhase = ''
     runHook preInstall
     mkdir -p $out/lib/node_modules/@openhands/agent-canvas $out/bin
-    cp -r bin build config node_modules package.json scripts $out/lib/node_modules/@openhands/agent-canvas/
+    cp -r bin build config node_modules package.json scripts tools $out/lib/node_modules/@openhands/agent-canvas/
     ln -s ../lib/node_modules/@openhands/agent-canvas/bin/agent-canvas.mjs $out/bin/agent-canvas
     runHook postInstall
   '';

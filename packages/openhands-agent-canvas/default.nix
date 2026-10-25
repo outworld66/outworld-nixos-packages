@@ -7,13 +7,13 @@
 
 buildNpmPackage {
   pname = "openhands-agent-canvas";
-  version = "1.28.1-oidc";
+  version = "1.28.1-oidc-rbac";
 
   src = fetchFromGitHub {
     owner = "outworld66";
     repo = "OpenHands";
-    rev = "80e128660d42e77616d73831a446c9029fec0be8";
-    hash = "sha256-18MrTHMRTo8hXuCsItLU9eP6v0eAZDpk8seUd4U4364=";
+    rev = "8de105267368ed10820f0f6c5640dbb21ad62074";
+    hash = "sha256-rHWUjICY4e6wqxRam6peWG/5cwt1X7MRFH52yE0qZRA=";
   };
 
   nodejs = nodejs_24;

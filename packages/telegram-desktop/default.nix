@@ -79,6 +79,7 @@ buildFHSEnv {
       libGL
       dbus
       gtk3
+      pango
       libx11
       libxext
       libxrender

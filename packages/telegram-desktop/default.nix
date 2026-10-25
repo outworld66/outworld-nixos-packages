@@ -80,6 +80,7 @@ buildFHSEnv {
       dbus
       gtk3
       pango
+      cairo
       libx11
       libxext
       libxrender

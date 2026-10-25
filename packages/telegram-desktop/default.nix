@@ -13,7 +13,7 @@
 }:
 
 let
-  version = "7.0.5";
+  version = "7.3.2";
 
   desktopItem = makeDesktopItem {
     name = "org.telegram.desktop";
@@ -43,8 +43,8 @@ let
     inherit version;
 
     src = fetchurl {
-      url = "https://github.com/telegramdesktop/tdesktop/releases/download/v${version}/tsetup.${version}.tar.xz";
-      hash = "sha256-N+I84IMzNAUEYjBCEguCb3oqVlDIMRhyGaucUgdA60I=";
+      url = "https://github.com/telegramdesktop/tdesktop/releases/download/v${version}/td-setup-linux-x64-${version}.tar.xz";
+      hash = "sha256-FzjBzMZg2u7AqwOOI5x+OakD1Z4dVkzYc9RAqgL9EwI=";
     };
 
     sourceRoot = "Telegram";

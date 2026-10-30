@@ -13,6 +13,7 @@ let
       ++ litellm.optional-dependencies.proxy
       ++ litellm.optional-dependencies.extra_proxy
       ++ litellm.optional-dependencies.proxy-runtime
+      ++ python3Packages.prisma.dependencies
     );
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
       prisma_6

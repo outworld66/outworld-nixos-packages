@@ -7,11 +7,13 @@
 
 let
   litellm = python3Packages.litellm.overridePythonAttrs (old: {
-    dependencies =
+    # The ungenerated dependency would shadow the client bundled below.
+    dependencies = builtins.filter (package: (package.pname or "") != "prisma") (
       (old.dependencies or [ ])
       ++ litellm.optional-dependencies.proxy
       ++ litellm.optional-dependencies.extra_proxy
-      ++ litellm.optional-dependencies.proxy-runtime;
+      ++ litellm.optional-dependencies.proxy-runtime
+    );
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
       prisma_6
       python3Packages.prisma

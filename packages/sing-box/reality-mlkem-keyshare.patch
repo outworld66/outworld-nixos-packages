@@ -1,0 +1,47 @@
+From 87f2d718a06af194b9335a3abd3b6611ec37b97a Mon Sep 17 00:00:00 2001
+From: Soheil Fakour <soheil.fakour@gmail.com>
+Date: Wed, 14 Oct 2026 23:47:44 +0000
+Subject: [PATCH] Fix REALITY client stripping X25519MLKEM768 from the
+ ClientHello
+
+---
+ common/tls/reality_client.go | 17 -----------------
+ 1 file changed, 17 deletions(-)
+
+diff --git a/common/tls/reality_client.go b/common/tls/reality_client.go
+index 13f88e385bf..d74ce011190 100644
+--- a/common/tls/reality_client.go
++++ b/common/tls/reality_client.go
+@@ -30,7 +30,6 @@ import (
+ 	"github.com/sagernet/sing-box/adapter"
+ 	C "github.com/sagernet/sing-box/constant"
+ 	"github.com/sagernet/sing-box/option"
+-	"github.com/sagernet/sing/common"
+ 	"github.com/sagernet/sing/common/debug"
+ 	E "github.com/sagernet/sing/common/exceptions"
+ 	"github.com/sagernet/sing/common/logger"
+@@ -145,22 +144,6 @@ func (e *RealityClientConfig) ClientHandshake(ctx context.Context, conn net.Conn
+ 	if err != nil {
+ 		return nil, err
+ 	}
+-	for _, extension := range uConn.Extensions {
+-		if ce, ok := extension.(*utls.SupportedCurvesExtension); ok {
+-			ce.Curves = common.Filter(ce.Curves, func(curveID utls.CurveID) bool {
+-				return curveID != utls.X25519MLKEM768
+-			})
+-		}
+-		if ks, ok := extension.(*utls.KeyShareExtension); ok {
+-			ks.KeyShares = common.Filter(ks.KeyShares, func(share utls.KeyShare) bool {
+-				return share.Group != utls.X25519MLKEM768
+-			})
+-		}
+-	}
+-	err = uConn.BuildHandshakeState()
+-	if err != nil {
+-		return nil, err
+-	}
+ 
+ 	if len(uConfig.NextProtos) > 0 {
+ 		for _, extension := range uConn.Extensions {
+-- 
+2.51.0

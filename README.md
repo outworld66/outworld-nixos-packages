@@ -13,6 +13,7 @@ Every `packages/*/default.nix` is exported automatically under
 - `mcp-mermaid`
 - `network-manager-amneziawg`
 - `rlsp-yaml`
+- `sing-box`
 - `telegram-desktop`
 
 The repository deliberately exports no NixOS modules, Home Manager modules,

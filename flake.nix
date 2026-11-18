@@ -24,7 +24,12 @@
         let
           pkgs = import nixpkgs {
             inherit system;
-            config.allowUnfreePredicate = pkg: nixpkgs.lib.getName pkg == "kaspersky-ksc-agent";
+            config.allowUnfreePredicate =
+              pkg:
+              builtins.elem (nixpkgs.lib.getName pkg) [
+                "kaspersky-ksc-agent"
+                "sota-connect"
+              ];
           };
         in
         nixpkgs.lib.genAttrs packageNames (

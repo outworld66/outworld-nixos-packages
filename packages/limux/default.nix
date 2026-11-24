@@ -3,6 +3,7 @@
   stdenvNoCC,
   fetchurl,
   dpkg,
+  patchelf,
   buildFHSEnv,
   glibc,
   librsvg,
@@ -20,7 +21,10 @@ let
     pname = "limux-unwrapped";
     inherit version src;
 
-    nativeBuildInputs = [ dpkg ];
+    nativeBuildInputs = [
+      dpkg
+      patchelf
+    ];
 
     unpackPhase = ''
       dpkg-deb --extract "$src" .
@@ -29,9 +33,24 @@ let
     installPhase = ''
       mkdir -p "$out"
       cp -a usr "$out/"
+      # The upstream .deb ships ELFs without a runpath, so they normally rely
+      # on the ld cache that buildFHSEnv fakes at runtime. extraBwrapArgs below
+      # binds the real glibc /etc back over that fake cache, which breaks ELF
+      # loading for the shipped binaries. Give them an explicit /usr/lib64
+      # runpath instead: it resolves inside the FHS sandbox and stays out of
+      # the ld cache, so the glibc store path keeps its original content.
+      for elf in $out/usr/bin/limux \
+        $out/usr/libexec/limux/limux-host \
+        $out/usr/lib/limux/libghostty-internal.so; do
+        patchelf --set-rpath /usr/lib64 "$elf"
+      done
     '';
 
     dontStrip = true;
+    # fixupPhase shrinks RUNPATH entries that do not exist at build time, which
+    # would drop the /usr/lib64 runpath set above; it only resolves inside the
+    # FHS sandbox at runtime.
+    dontPatchELF = true;
   };
 in
 buildFHSEnv {

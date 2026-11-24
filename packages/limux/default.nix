@@ -71,6 +71,7 @@ buildFHSEnv {
       libepoxy
       libxkbcommon
       wayland
+      gsettings-desktop-schemas
       mesa
       libdrm
       alsa-lib

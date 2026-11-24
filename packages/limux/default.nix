@@ -4,6 +4,7 @@
   fetchurl,
   dpkg,
   buildFHSEnv,
+  glibc,
   librsvg,
 }:
 
@@ -58,6 +59,15 @@ buildFHSEnv {
     ];
 
   runScript = "${limux-unwrapped}/usr/bin/limux";
+  # buildFHSEnv mounts a tmpfs over ${glibc}/etc so a fake ld cache exists at
+  # the store path (Steam pressure-vessel). That changes glibc's nar hash as
+  # seen from inside the sandbox, so every nix build, copy or verify touching
+  # glibc fails with a hash mismatch — deploys run from limux terminals kept
+  # dying on `nix-copy-closure`. Limux is not a game env; nothing here reads the
+  # fake cache. Bind the real directory back over the mask: extraBwrapArgs go
+  # last, and bwrap resolves bind sources against the host namespace.
+  extraBwrapArgs = [ "--ro-bind ${glibc}/etc ${glibc}/etc" ];
+
   profile = ''
     export GDK_PIXBUF_MODULE_FILE="${librsvg}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
   '';
